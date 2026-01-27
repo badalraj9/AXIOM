@@ -1,26 +1,82 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* System Identity Colors */
+  --color-neural: #00f0ff; /* SENTRY / Intelligence */
+  --color-neural-dim: #00f0ff66;
+
+  --color-memory: #bd00ff; /* MT / Context */
+  --color-memory-dim: #bd00ff66;
+
+  --color-research: #ffaa00; /* ORE / Analysis */
+  --color-research-dim: #ffaa0066;
+
+  --color-visual: #ff0055; /* MAREY / Media */
+  --color-visual-dim: #ff005566;
+
+  --color-tools: #00ff9d; /* CAPSULE / Execution */
+  --color-tools-dim: #00ff9d66;
+
+  /* Base Application Colors */
+  --color-void: #050505;
+  --color-void-panel: #0a0a0a;
+  --color-text-primary: #eaeaea;
+  --color-text-secondary: #888888;
+  --color-grid: #222222;
+
+  /* Animations */
+  --animate-pulse-fast: pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-glitch: glitch 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both
+    infinite;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  body {
+    background-color: var(--color-void);
+    color: var(--color-text-primary);
+    font-family: "Inter", sans-serif; /* Fallback until fonts loaded */
+    overflow-x: hidden;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* Scanline Effect */
+  body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0),
+      rgba(255, 255, 255, 0) 50%,
+      rgba(0, 0, 0, 0.05) 50%,
+      rgba(0, 0, 0, 0.05)
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.5;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+  100% {
+    transform: translate(0);
+  }
 }
