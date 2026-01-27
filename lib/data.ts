@@ -50,27 +50,246 @@ export const PROJECTS: Record<ProjectId, Project> = {
     ],
     techStack: ["Next.js", "Redis", "JWT", "Edge Functions"],
     documentation: `
-# Architecture: SENTRY Gatekeeper
+# SENTRY
 
-## Overview
-SENTRY is designed as a **Wait-Free** authentication service. It eliminates database bottlenecks on session validation by distributing session keys to the Edge.
+> **Developer Collaboration OS** — A decision intelligence platform where thinking happens.
 
-### Core Components
-1. **The Gate**: A Next.js Middleware interception layer.
-2. **The Keymaster**: A Redis-backed session store (Upstash).
-3. **The Audit**: Asynchronous logging of security events to ElasticSearch.
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue.svg)](https://www.typescriptlang.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-20+-green.svg)](https://nodejs.org/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14+-blue.svg)](https://www.postgresql.org/)
+[![License](https://img.shields.io/badge/License-Proprietary-red.svg)]()
 
-## Data Flow
-\`\`\`mermaid
-graph LR
-    User-->Edge_Middleware
-    Edge_Middleware-->Redis_Cache
-    Redis_Cache-->Validation
-    Validation-->App_Shell
+---
+
+## What is SENTRY?
+
+SENTRY is a **standalone, developer-first collaboration platform** where everything except coding lives. It provides:
+
+- 🎯 **Structured Communication** — Chats, discussions, and workshops with intent
+- 🧠 **Intelligent Decision Capture** — Automatic detection and recall of decisions
+- 📚 **Knowledge Accumulation** — Without documentation overhead
+- 🔒 **Personal & Collaborative Workspaces** — With fine-grained permissions
+- ⚡ **Adaptive Assistance** — Rule-based intelligence that learns your patterns
+
+### What SENTRY is NOT
+
+- ❌ Not a code repository (no Git functionality)
+- ❌ Not a project management tool (no sprints, tickets, burndown charts)
+- ❌ Not a social network (no followers, likes, viral content)
+- ❌ Not an LLM-powered chatbot (no generative AI, no hallucinations)
+
+---
+
+## Core Philosophy
+
+| Principle                           | Description                                                               |
+| ----------------------------------- | ------------------------------------------------------------------------- |
+| **Projects are living entities**    | Not just folders — they have pulse, history, knowledge                    |
+| **Knowledge is first-class**        | Decisions aren't buried in chats — they're structured, searchable, linked |
+| **Collaboration is structured**     | Intent-driven discussions, not noisy channels                             |
+| **Automation is ambient**           | Silent by default, never intrusive                                        |
+| **One intelligence, many contexts** | The Neural Hub adapts to each user and project                            |
+
+---
+
+## Key Features
+
+### 🎯 Intent Checkpoints
+
+Set explicit goals for discussions. The system scopes all analysis to your current intent.
+
+\`\`\`
+/intent "Design caching strategy for API v2"
 \`\`\`
 
-## Security Protocol (Class 5)
-SENTRY implements **rotating nonces** for all API requests. A client implementation must sign headers with the current session epoch to prevent replay attacks.
+### 🧠 Decision Detection
+
+The Neural Hub detects decisions in natural conversation:
+
+\`\`\`
+Message: "Let's go with Redis for session storage"
+         ↓
+System:  [Decision Detected: Confidence 0.82]
+         "Use Redis for session storage?"
+         [Confirm] [Edit] [Dismiss]
+\`\`\`
+
+### 🔍 Decision Recall
+
+Instantly retrieve past decisions with context:
+
+\`\`\`
+@assist why redis?
+→ "You decided to use Redis for session storage (3 days ago)
+   Rationale: Better persistence than Memcached
+   Participants: @alice, @bob"
+\`\`\`
+
+### 🏭 Workshops
+
+Time-bounded, goal-oriented collaboration sessions with mandatory outcomes.
+
+### 📄 Living Documents
+
+Structured papers that link to decisions, discussions, and files.
+
+---
+
+## Architecture
+
+\`\`\`
+┌─────────────────────────────────────────────────────────┐
+│                    Interface Layer                      │
+│         Web App  •  CLI  •  Mobile (Future)             │
+└─────────────────────────┬───────────────────────────────┘
+                          │
+┌─────────────────────────▼───────────────────────────────┐
+│                    API Gateway                          │
+│              REST + WebSocket (Socket.io)               │
+└─────────────────────────┬───────────────────────────────┘
+                          │
+┌─────────────────────────▼───────────────────────────────┐
+│                   Platform Core                         │
+│  ┌────────────────────────────────────────────────────┐ │
+│  │              Business Logic Layer                   │ │
+│  │  Users • Projects • Chats • Decisions • Workshops  │ │
+│  └────────────────────────────────────────────────────┘ │
+│  ┌────────────────────────────────────────────────────┐ │
+│  │           Neural Hub (Intelligence)                 │ │
+│  │  Sensors → Aggregation → Activation → Learning     │ │
+│  └────────────────────────────────────────────────────┘ │
+└─────────────────────────┬───────────────────────────────┘
+                          │
+┌─────────────────────────▼───────────────────────────────┐
+│                    Data Layer                           │
+│         PostgreSQL  •  Redis  •  S3/Blob                │
+└─────────────────────────────────────────────────────────┘
+\`\`\`
+
+---
+
+## Neural Hub: AI-Inspired Intelligence (Zero ML)
+
+The intelligence engine uses mathematical foundations from neural network theory — but implemented as **pure deterministic algorithms**. No models, no training, no black boxes.
+
+| Concept            | Implementation                         |
+| ------------------ | -------------------------------------- |
+| Weighted Sums      | \`z = Σ(signal × weight)\`               |
+| Sigmoid Activation | \`σ(z) = 1/(1+e^(-k(z-θ)))\`             |
+| Hebbian Learning   | \`Δw = η × signal × outcome\`            |
+| Exponential Decay  | \`w(t) = w₀×e^(-λt) + base×(1-e^(-λt))\` |
+
+**Every decision is 100% traceable and explainable.**
+
+---
+
+## Tech Stack
+
+| Layer        | Technology                                 |
+| ------------ | ------------------------------------------ |
+| **Backend**  | Node.js + TypeScript + Express + Socket.io |
+| **Database** | PostgreSQL 14+                             |
+| **Cache/RT** | Redis 7+                                   |
+| **Frontend** | React + Vite + TypeScript                  |
+| **CLI**      | Node.js + Commander.js                     |
+
+---
+
+## Quick Start
+
+### Prerequisites
+
+- Node.js 20+
+- Docker & Docker Compose
+- Git
+
+### Setup
+
+\`\`\`bash
+# Clone the repository
+git clone https://github.com/your-org/sentry.git
+cd sentry
+
+# Start infrastructure (PostgreSQL + Redis)
+docker-compose up -d
+
+# Install dependencies
+npm install
+
+# Run database migrations
+npm run db:migrate
+
+# Start development servers
+npm run dev
+\`\`\`
+
+### Access Points
+
+| Service   | URL                   |
+| --------- | --------------------- |
+| Web App   | http://localhost:5173 |
+| API       | http://localhost:3000 |
+| WebSocket | ws://localhost:3000   |
+
+---
+
+## Project Structure
+
+\`\`\`
+sentry/
+├── packages/
+│   ├── backend/          # Express API + Neural Hub
+│   ├── web/              # React web application (renamed from frontend)
+│   ├── cli/              # Command-line tool
+│   └── shared/           # Shared types & utilities
+├── database/
+│   └── migrations/       # SQL migration files
+├── docker-compose.yml    # Infrastructure setup
+├── docs/
+│   ├── DEVELOPMENT.md    # Development guide
+│   ├── API.md            # API documentation
+│   ├── ARCHITECTURE.md   # Detailed architecture
+│   ├── USER_GUIDE.md     # End-user documentation
+│   └── DEPLOYMENT.md     # Production deployment guide
+├── figma-mcp-server/     # Figma MCP integration server
+└── README.md
+\`\`\`
+
+---
+
+## Documentation
+
+| Document                                  | Description                                           |
+| ----------------------------------------- | ----------------------------------------------------- |
+| [DEVELOPMENT.md](./docs/DEVELOPMENT.md)   | Setup, development workflow, contribution guide       |
+| [API.md](./docs/API.md)                   | REST & WebSocket API reference                        |
+| [ARCHITECTURE.md](./docs/ARCHITECTURE.md) | Detailed system architecture                          |
+| [NEURAL_HUB.md](./docs/NEURAL_HUB.md)     | Complete Neural Hub intelligence engine documentation |
+| [DEPLOYMENT.md](./docs/DEPLOYMENT.md)     | Production deployment guide                           |
+| [USER_GUIDE.md](./docs/USER_GUIDE.md)     | End-user documentation                                |
+
+---
+
+## Performance Targets
+
+| Metric                 | Target  |
+| ---------------------- | ------- |
+| Neural Hub per-message | < 1ms   |
+| API p95 response       | < 100ms |
+| WebSocket latency      | < 30ms  |
+| Decision detection F1  | > 0.75  |
+
+---
+
+## Team
+
+Built by the SENTRY team.
+
+---
+
+## License
+
+Proprietary. All rights reserved.
 `,
   },
   mt: {
@@ -97,21 +316,211 @@ SENTRY implements **rotating nonces** for all API requests. A client implementat
     ],
     techStack: ["Pinecone", "Python", "LangChain", "Postgres"],
     documentation: `
-# Architecture: MT (Memory Thread)
+# Memory Thread 🧠
 
-## The Hippocampus Model
-MT is built on the premise that **Context is King**. It is not just a database; it is a **Retrieval Augmented Generation (RAG)** pipeline optimized for latency.
+**The Truth-Aware Memory Engine for AI Agents**
 
-### Storage Layers
-- **Hot Memory (Short-Term)**: Redis List. Stores the last N turns of conversation.
-- **Cold Memory (Long-Term)**: Pinecone Vector Store. Semantic archives of all interactions.
-- **Fact Store**: Postgres. Hard facts (User Name, API Keys) that should not be Hallucinated.
+Memory Thread (MT) is an event-sourced memory system that gives AI agents the ability to remember facts, handle contradictions, and know when to say "I don't know."
 
-## Vectorization Strategy
-We utilize a **Sliding Window** approach for embedding.
-1. Raw Text is chunked into 512-token segments.
-2. Segments are enriched with metadata (Timestamp, Speaker).
-3. Embeddings are generated via \`text-embedding-3-small\`.
+> _Not a vector database. Not a chatbot. A Truth Maintenance System._
+
+---
+
+## 🎯 What Makes MT Different
+
+| Feature            | Typical AI Memory   | Memory Thread             |
+| ------------------ | ------------------- | ------------------------- |
+| **Data Model**     | Key-value / Vectors | Events → States           |
+| **Uncertainty**    | Hidden or none      | Explicit (Truth Vectors)  |
+| **Contradictions** | Last-write-wins     | Higher authority wins     |
+| **"I don't know"** | Empty response      | Formal \`None\` with reason |
+| **Audit Trail**    | Logs (maybe)        | Immutable event log       |
+
+### Core Capabilities
+
+- **🔄 Deterministic Replay** — Reconstruct any entity's state at any point in time
+- **📊 Truth Vectors** — 4D truth scoring: (Confidence, Authority, Freshness, Corroboration)
+- **⏱️ Memory Decay** — Facts fade naturally based on configurable decay curves
+- **🔀 Contradiction Resolution** — Mathematical resolution based on authority
+- **⚡ High Performance** — ~3,600 EPS full pipeline, ~40,000+ transport layer
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- Python 3.10+
+- PostgreSQL 14+ (event store)
+- Qdrant (optional, for vector search)
+
+### Installation
+
+\`\`\`bash
+git clone https://github.com/badalraj9/MemoryThread.git
+cd MemoryThread
+pip install -r requirements.txt
+\`\`\`
+
+### Set Up Database
+
+\`\`\`bash
+# Create database
+psql -U postgres -c "CREATE DATABASE memory_thread_db;"
+
+# Apply schema
+psql -U postgres -d memory_thread_db -f memory_thread/db/schema_phase_3_4.sql
+\`\`\`
+
+### Configure Environment
+
+\`\`\`bash
+export POSTGRES_USER=postgres
+export POSTGRES_PASSWORD=your_password
+export POSTGRES_DB=memory_thread_db
+export POSTGRES_HOST=localhost
+\`\`\`
+
+### Run the API
+
+\`\`\`bash
+uvicorn memory_thread.api.main:app --host 0.0.0.0 --port 8000
+\`\`\`
+
+### Test It
+
+\`\`\`bash
+# Health check
+curl http://localhost:8000/health
+
+# Ingest a memory
+curl -X POST http://localhost:8000/ingest \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "producer_id": "agent-001",
+    "events": [{
+      "content": "User prefers dark mode",
+      "timestamp": "2025-01-01T10:00:00Z"
+    }]
+  }'
+\`\`\`
+
+---
+
+## 📡 API Reference
+
+### Health & Monitoring
+
+| Endpoint            | Method | Description                           |
+| ------------------- | ------ | ------------------------------------- |
+| \`GET /\`             | GET    | Quick health check                    |
+| \`GET /health\`       | GET    | Detailed health with service statuses |
+| \`GET /health/ready\` | GET    | Kubernetes readiness probe            |
+| \`GET /health/live\`  | GET    | Kubernetes liveness probe             |
+| \`GET /metrics\`      | GET    | Prometheus-compatible metrics         |
+| \`GET /version\`      | GET    | Version and build info                |
+
+### Event Ingestion
+
+| Endpoint                | Method | Description                 |
+| ----------------------- | ------ | --------------------------- |
+| \`POST /register\`        | POST   | Register a producer         |
+| \`POST /ingest\`          | POST   | Ingest a batch of events    |
+| \`GET /control/throttle\` | GET    | Get current system pressure |
+
+### Maintenance
+
+| Endpoint                          | Method | Description                   |
+| --------------------------------- | ------ | ----------------------------- |
+| \`GET /maintenance/proposals\`      | GET    | Get duplicate merge proposals |
+| \`POST /maintenance/approve/merge\` | POST   | Approve a merge proposal      |
+| \`GET /maintenance/health/stats\`   | GET    | Dashboard metrics             |
+
+---
+
+## 🏗️ Architecture
+
+\`\`\`
+┌─────────────────────────────────────────────────────────────┐
+│                      MEMORY THREAD                          │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐        │
+│  │ FastAPI     │  │ ZMQ Fabric  │  │ Slab        │        │
+│  │ Gateway     │→ │ (Transport) │→ │ Allocator   │        │
+│  └─────────────┘  └─────────────┘  └─────────────┘        │
+│         │                                  │                │
+│         ▼                                  ▼                │
+│  ┌─────────────────────────────────────────────────┐      │
+│  │          TRUTH MANAGEMENT SYSTEM (TMS)          │      │
+│  │  • Truth Vector Scoring                         │      │
+│  │  • State Derivation                             │      │
+│  │  • Freshness Decay                              │      │
+│  └─────────────────────────────────────────────────┘      │
+│         │                                                   │
+│         ▼                                                   │
+│  ┌──────────────┐  ┌──────────────┐                       │
+│  │ PostgreSQL   │  │ Qdrant       │                       │
+│  │ (Events)     │  │ (Vectors)    │                       │
+│  └──────────────┘  └──────────────┘                       │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+\`\`\`
+
+---
+
+## 📚 Documentation
+
+| Document                                                                               | Description                        |
+| -------------------------------------------------------------------------------------- | ---------------------------------- |
+| [Unified System Overview](docs/thesis_reference/00_Unified_System_Overview.md)         | Philosophy and high-level concepts |
+| [Architectural Layers](docs/thesis_reference/02_Architectural_Layers.md)               | Deep dive into system layers       |
+| [Mathematical Specifications](docs/thesis_reference/06_Mathematical_Specifications.md) | Truth Vector algebra               |
+| [End-to-End Workflow](docs/thesis_reference/07_End_to_End_Workflow.md)                 | Data flow from API to storage      |
+
+---
+
+## 🧪 Running Tests
+
+\`\`\`bash
+# All tests
+pytest tests/ -v
+
+# Specific test suites
+pytest tests/test_tms_complete.py -v      # TMS logic
+pytest tests/test_realworld_scenarios.py -v  # AI agent simulation
+pytest tests/test_persistence_roundtrip.py -v  # Database persistence
+\`\`\`
+
+---
+
+## 📊 Benchmarks
+
+\`\`\`bash
+# Full pipeline benchmark
+python benchmarks/benchmark_realworld.py
+
+# Expected results (i5-12450H):
+# • Event Creation: ~50,000 EPS
+# • State Derivation: ~30,000 EPS
+# • Full Pipeline: ~3,600 EPS
+\`\`\`
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Please read [CONTRIBUTING.md](CONTRIBUTING.md) before submitting.
+
+---
+
+## 📜 License
+
+MIT License — see [LICENSE](LICENSE) for details.
+
+---
+
+**Built for AI that needs to remember.** 🚀
 `,
   },
   marey: {
@@ -138,20 +547,35 @@ We utilize a **Sliding Window** approach for embedding.
     ],
     techStack: ["Three.js", "React Three Fiber", "SDXL", "WebGL"],
     documentation: `
-# Architecture: MAREY Renderer
+# MAREY
 
-## Visual Synthesis Pipeline
-MAREY is an **Event-Driven** render engine. It listens for \`RENDER_REQUEST\` events on the System Bus and output pixel data or React Components.
+## Technological Apex Development Plan
 
-### The Generative Loop
-1. **Intent Parsing**: Determines if the user wants a *Chart*, an *Image*, or a *3D Object*.
-2. **Layout Engine**: Calculates the bounding box constraints.
-3. **Synthesis**:
-   - *3D*: Instantiates R3F canvas components.
-   - *2D*: Calls Stable Diffusion API via localized proxy.
+> "If your system can run, MAREY can run better."
 
-## Performance Optimization
-To maintain 60FPS on the Client, MAREY offloads all heavy generation to a dedicated GPU worker thread.
+MAREY (formerly Optimus Ultra) is an adaptive media processing system designed to run on any hardware, from legacy laptops to supercomputer clusters.
+
+## Core Philosophy: Absolute Adaptability
+
+*   **Zero Compromise:** Runs on anything.
+*   **Maximum Adaptation:** Self-optimizing in real-time.
+*   **Universal Execution:** CPU, GPU, DSP, NPU - if it computes, we use it.
+
+## Architecture
+
+The system is built as a **Modular Monolith** with distributed-ready interfaces.
+
+### Core Modules
+*   **Hardware Intelligence Layer (Phase 0):** Deep system profiling.
+*   **Model Capability Abstraction (Phase 1):** Matching models to hardware.
+*   **Video Processing (Phase 2):** Adaptive frame pipelines (Coming Soon).
+*   **Orchestration (Phase 4):** Distributed workload management (Coming Soon).
+
+## Setup
+
+1.  Install dependencies: \`pip install -r requirements.txt\`
+2.  Run hardware detection: \`python -m marey.cli detect\`
+3.  Manage models: \`python -m marey.cli_models list\`
 `,
   },
   ore: {
@@ -178,18 +602,80 @@ To maintain 60FPS on the Client, MAREY offloads all heavy generation to a dedica
     ],
     techStack: ["Python", "Pandas", "Scikit-Learn", "FastAPI"],
     documentation: `
-# Architecture: ORE (Optimized Research Engine)
+# ORE: Open Research Engine
 
-## Distributed Compute Grid
-ORE is designed to run asynchronously. It follows a **Leader-Follower** architecture.
-- **The Brain (Leader)**: FastAPI Server that queues jobs.
-- **The Minions (Followers)**: Python workers processing data frames.
+ORE is an algorithmic, LLM-free system for large-scale scientific reasoning.
 
-## Algorithmic Strategy
-ORE utilizes a custom implementation of **Prophet** for time-series forecasting, modified to account for high-volatility "Black Swan" events in the input data.
+## Phases Implemented
+- **Phase 0**: System Bootstrapping (FastAPI + React + SQLite).
+- **Phase 1**: Intelligent Query Understanding (NLP pipeline).
+- **Phase 2**: Intelligent Ingestion (ArXiv Fetcher + Async Engine).
+- **Phase 3**: Content Extraction (PDF -> Structured JSON).
+- **Phase 4**: Processing (Chunking, Canonicalization, Deduplication).
+- **Phase 5**: Retrieval Engine (Hybrid Sparse + Dense).
+- **Phase 6**: Clustering (TF-IDF + K-Means).
+- **Phase 7**: Contradiction Detection (Polarity Analysis).
+- **Phase 8**: Citation Graph (NetworkX + Louvain).
+- **Phase 9**: Research Gap Identification (Method-Dataset Matrix).
 
-### Data Ingestion
-ORE accepts \`.csv\`, \`.json\`, and real-time WebSocket streams.
+## Robustness Features
+- **Retry Logic**: ArXiv fetcher retries 3 times with exponential backoff.
+- **Concurrency**: Asyncio-based ingestion with SQLite locking for thread safety.
+- **NLP Handling**: Slang mapping ("stuff" -> "methods"), noise removal ("idk"), and intent classification.
+
+## Setup
+
+### Backend
+1. Navigate to \`ore-backend/\`:
+   \`\`\`bash
+   cd ore-backend
+   \`\`\`
+2. Install dependencies:
+   \`\`\`bash
+   pip install -r requirements.txt
+   \`\`\`
+3. Download NLP models:
+   \`\`\`bash
+   python -m spacy download en_core_web_sm
+   python -m nltk.downloader wordnet omw-1.4
+   \`\`\`
+4. Run the server:
+   \`\`\`bash
+   uvicorn main:app --reload
+   \`\`\`
+
+### Frontend
+1. Navigate to \`ore-frontend/\`:
+   \`\`\`bash
+   cd ore-frontend
+   \`\`\`
+2. Install dependencies:
+   \`\`\`bash
+   npm install
+   \`\`\`
+3. Run the dev server:
+   \`\`\`bash
+   npm run dev
+   \`\`\`
+
+## Testing
+Run the comprehensive stress test suite to verify robustness:
+\`\`\`bash
+python scripts/stress_test.py
+\`\`\`
+4. **Test Processing (Phase 4)**:
+   \`\`\`bash
+   python scripts/test_phase4.py
+   \`\`\`
+5. **Test Phases 5-7**:
+   \`\`\`bash
+   python scripts/test_phases_5_7.py
+   \`\`\`
+6. **Test Phases 8-9 (Final)**:
+   \`\`\`bash
+   python scripts/stress_test_final.py
+   \`\`\`
+This runs 10 scenarios including network failure simulation, concurrent load, and edge-case query parsing.
 `,
   },
   capsule: {
@@ -215,21 +701,86 @@ ORE accepts \`.csv\`, \`.json\`, and real-time WebSocket streams.
     ],
     techStack: ["WebComponents", "Shadow DOM", "Zod", "WASM"],
     documentation: `
-# Architecture: CAPSULE Sandbox
+# CAPSULE - Capability-Adaptive Plugin System for Unified Lightweight Execution
 
-## The Plugin Protocol
-CAPSULE enforces strictly typed interfaces using **Zod** schemas. A plugin cannot load unless its manifest complies with the Core Standard.
+## Overview
+CAPSULE is a modular research assistant architecture designed for stability, isolation, and explicit capability management. It operates as a local-first system where plugins add functionality (PDF viewing, Note taking, AI analysis) without compromising the core stability.
 
-### Isolation Strategy
-To prevent plugins from crashing the Main Thread, CAPSULE runs all external code in a **Web Worker** or an isolated **Iframe**.
-Communication happens via the \`postMessage\` API, wrapped in a type-safe RPC layer.
+## Project Status
+- **Phase 1: Core Foundation** ✅ (Completed)
+- **Phase 2: First Real Plugin (PDF)** ✅ (Completed)
+- **Phase 3: Multi-Plugin System** ✅ (Completed)
+- **Phase 4: Systems Engine** ✅ (Completed)
+- **Phase 5: Architecture** ✅ (Completed)
+- **Phase 6: Analytics ("Feels Like AI")** ✅ (Completed)
+- **Phase 7: Optimization ("Illegal Speed")** ✅ (Completed)
 
-\`\`\`typescript
-// Example Manifest
-interface PluginManifest {
-  id: string;
-  permissions: ["read:memory", "write:log"];
-  entryPoint: "main.wasm";
+## Features
+- **Event-Driven Core**: Async event bus for decoupled communication.
+- **Plugin System**:
+  - Strict isolation (logical).
+  - Explicit capability manifests (\`manifest.json\`).
+  - Automatic dependency installation.
+- **State Management**: SQLite-backed persistent state for plugins.
+- **API**: FastAPI bridge exposing REST endpoints and WebSockets.
+- **Workflow Engine**: Chain commands into automated sequences.
+- **Search**: Full-text document indexing (SQLite FTS5).
+- **Analytics**: Local Knowledge Graph and Citation Impact Radar.
+- **High Performance**: Zero-copy data flow (Artifacts) and binary event tracing.
+
+## Supported Plugins
+1. **PDF Viewer**: Renders PDF pages to images using \`pymupdf\` (Zero-Copy supported).
+2. **Note Taking**: Manage notes linked to documents.
+3. **Citation Manager**: Manage citations.
+4. **Citation Radar**: Analyze citation impact/frequency.
+5. **Document Indexer**: Local full-text search (supports Indexing Artifacts).
+6. **Knowledge Graph**: Tracks relationships between documents, notes, and entities.
+7. **Workflow Runner**: Automate command sequences.
+8. **REPL**: Interactive system inspection.
+
+## Getting Started
+
+### Prerequisites
+- Python 3.11+
+- \`pip\`
+
+### Installation
+1. Clone the repository.
+2. Install dependencies:
+   \`\`\`bash
+   pip install -r requirements.txt
+   \`\`\`
+
+### Running the Core
+Start the API server:
+\`\`\`bash
+python -m core.app.main
+\`\`\`
+Server runs at \`http://127.0.0.1:8000\`.
+
+### API Usage
+
+#### Execute a Workflow
+\`POST /commands/execute\`
+\`\`\`json
+{
+  "command": "workflow.run",
+  "args": {
+    "steps": [
+      {"command": "pdf.open", "args": {"path": "/path/to/doc.pdf"}},
+      {"command": "pdf.export_artifact", "args": {}},
+      {"command": "indexer.index_artifact", "args": {"artifact_id": "$prev.artifact_id"}}
+    ]
+  }
+}
+\`\`\`
+
+#### Query Knowledge Graph
+\`POST /commands/execute\`
+\`\`\`json
+{
+  "command": "graph.query",
+  "args": {}
 }
 \`\`\`
 `,
