@@ -80,3 +80,140 @@
     transform: translate(0);
   }
 }
+
+/* Documentation Styles */
+@layer components {
+  /* ASCII Art Glow Effect */
+  .axiom-docs pre {
+    position: relative;
+  }
+  
+  .axiom-docs pre::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(0, 240, 255, 0.03) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+
+  /* Code Syntax Highlighting Colors */
+  .axiom-docs code .comment {
+    color: #6a737d;
+    font-style: italic;
+  }
+  
+  .axiom-docs code .string {
+    color: #a5d6ff;
+  }
+  
+  .axiom-docs code .keyword {
+    color: #ff7b72;
+    font-weight: 600;
+  }
+  
+  .axiom-docs code .number {
+    color: #79c0ff;
+  }
+  
+  .axiom-docs code .function {
+    color: #d2a8ff;
+  }
+  
+  .axiom-docs code .type {
+    color: #ffa657;
+  }
+
+  /* ASCII Box Characters Enhancement */
+  .axiom-docs pre:has(.ascii-art) {
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+  }
+
+  /* Table Hover Glow */
+  .axiom-docs table tr:hover td {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  }
+
+  /* Link Hover Animation */
+  .axiom-docs a {
+    position: relative;
+  }
+  
+  .axiom-docs a::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: currentColor;
+    transition: width 0.3s ease;
+  }
+  
+  .axiom-docs a:hover::after {
+    width: 100%;
+  }
+
+  /* Architecture Diagram Box Styling */
+  .axiom-docs .architecture-box {
+    background: linear-gradient(
+      135deg,
+      rgba(0, 240, 255, 0.05) 0%,
+      rgba(0, 240, 255, 0.02) 100%
+    );
+    border: 1px solid rgba(0, 240, 255, 0.2);
+    box-shadow: 
+      0 0 20px rgba(0, 240, 255, 0.1),
+      inset 0 0 20px rgba(0, 240, 255, 0.02);
+  }
+
+  /* Code Block Scrollbar */
+  .axiom-docs pre::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+  }
+  
+  .axiom-docs pre::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.02);
+  }
+  
+  .axiom-docs pre::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+  }
+  
+  .axiom-docs pre::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  /* Documentation Scrollbar */
+  .axiom-docs {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+  }
+}
+
+/* Flowchart Connector Lines */
+@layer utilities {
+  .flow-line {
+    position: relative;
+  }
+  
+  .flow-line::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    width: 2px;
+    height: 20px;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 240, 255, 0.5),
+      transparent
+    );
+    transform: translateX(-50%);
+  }
+}
